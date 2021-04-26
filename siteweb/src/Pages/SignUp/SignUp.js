@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Errors from "../../Component/Errors";
+import background from "../../Assets/image/iss.jpg";
 
 import { register, videErrors } from "../../JS/action/user";
 
@@ -15,8 +16,8 @@ const SignUp = ({ history }) => {
     password: "",
     etablissement: "",
   });
-  //   const errors = useSelector((state) => state.userReducer.errors);
-  //   console.log(`errrooooos :${errors.length}`);
+  const errors = useSelector((state) => state.userReducer.errors);
+  console.log(`errrooooos :${errors.length}`);
   const dispatch = useDispatch();
   console.log(history);
   const handleChange = (e) => {
@@ -33,27 +34,10 @@ const SignUp = ({ history }) => {
         <div className="row d-flex">
           <div className="col-lg-6">
             {" "}
-            <img src="https://i.imgur.com/uNGdWHi.png" className="image" />
+            <img src={background} className="image" />
           </div>{" "}
           <div className="col-lg-6">
             <div className="card2 card border-0 px-4 py-5">
-              <div className="row mb-4 px-3">
-                <h6 className="mb-0 mr-4 mt-2">Sign in with</h6>
-                <div className="facebook text-center mr-3">
-                  <i class="fab fa-facebook-f"></i>
-                </div>
-                <div className="twitter text-center mr-3">
-                  <i class="fab fa-twitter"></i>
-                </div>
-                <div className="linkedin text-center mr-3">
-                  <i class="fab fa-linkedin"></i>
-                </div>
-              </div>
-              <div className="row px-3 mb-4">
-                <div className="line" />{" "}
-                <small className="or text-center">Or</small>
-                <div className="line" />
-              </div>
               <div className="row px-3">
                 {" "}
                 <label className="mb-1">

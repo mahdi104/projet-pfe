@@ -1,12 +1,19 @@
 import React from "react";
-import { Navbar } from "react-bootstrap";
+import AddProduct from "../../Component/AddProduct";
 import "./InterfaceAdmin.css";
 const InterfaceAdmin = () => {
   return (
     <div>
-      <h2>Dashboard Admin</h2>
+      <div className="sideBar">
+        <a href="/AddProduct">Ajouter Produit</a>
 
-      <Navbar bg="light" className="stylenavad">
+        <a href="#">Mise à Jour Produit</a>
+
+        <a href="#">Supprimer produit</a>
+
+        <a href="#">Liste Des Produits</a>
+      </div>
+      {/* <Navbar bg="light" className="stylenavad">
         <Navbar.Brand href="#home">
           <span className="text-style">Ajouter Produit</span>
         </Navbar.Brand>
@@ -28,7 +35,7 @@ const InterfaceAdmin = () => {
         <Navbar.Brand href="#home" className="stylenavad">
           <span className="text-style">Liste Des Produits</span>
         </Navbar.Brand>
-      </Navbar>
+      </Navbar> */}
     </div>
   );
 };

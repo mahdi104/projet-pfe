@@ -1,7 +1,7 @@
 import React from "react";
 import { Form } from "react-bootstrap";
-import { addBtn } from "../../Assets/image/add.png";
-import { editBtn } from "../../Assets/image/edit.png";
+import addBtn from "../../Assets/image/add.png";
+import editBtn from "../../Assets/image/edit.png";
 
 const AddProduct = () => {
   const isEdit = useSelector((state) => state.productReducer.isEdit);

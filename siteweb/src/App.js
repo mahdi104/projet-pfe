@@ -5,6 +5,7 @@ import Footer from "./Component/Footer/Footer";
 import "./App.css";
 import { Route, Switch } from "react-router-dom";
 import PrivateRoute from "./router/PrivateRoute";
+import PrivateRouteadmin from "./router/PrivateRouteadmin";
 
 import Home from "./Pages/Home";
 import Presentation from "./Pages/Presentation";
@@ -18,9 +19,9 @@ import SignUp from "./Pages/SignUp/SignUp";
 import Profile from "./Pages/profil/Profil";
 import InterfaceAdmin from "./Pages/InterfaceAdmin/InterfaceAdmin";
 import SignInAdmin from "./Pages/SignInAdmin/SignInAdmin";
+import AddProduct from "./Component/AddProduct/AddProduct";
 
 function App() {
-  
   return (
     <div className="App">
       <NavBar />
@@ -35,8 +36,9 @@ function App() {
         <Route path="/signin" component={SignIn} />
         <Route path="/signup" component={SignUp} />
         <PrivateRoute path="/profile" component={Profile} />
-        <PrivateRoute path="/signinadmin" component={SignInAdmin}/>
-        <PrivateRoute path="/interfaceadmin" component={InterfaceAdmin} />
+        <Route path="/signinadmin" component={SignInAdmin} />
+        <PrivateRouteadmin path="/interfaceadmin" component={InterfaceAdmin} />
+        <Route path="/AddProduct" component={AddProduct} />
       </Switch>
       <Footer />
     </div>

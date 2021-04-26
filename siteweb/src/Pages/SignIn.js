@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import "./SignUp/SignUp.css";
 import { useDispatch, useSelector } from "react-redux";
 import { login, videErrors } from "../JS/action/user";
-
 import Errors from "../Component/Errors";
 import { Link } from "react-router-dom";
+import background from "../Assets/image/iss.jpg";
 
 const SignIn = ({ history }) => {
   const [user, setuser] = useState({});
@@ -29,29 +29,11 @@ const SignIn = ({ history }) => {
         <div className="row d-flex">
           <div className="col-lg-6">
             <div className="card1 border-0 px-4 py-1">
-              <img src="https://i.imgur.com/uNGdWHi.png" className="image" />{" "}
+              <img src={background} className="image" />{" "}
             </div>
           </div>
           <div className="col-lg-6">
             <div className="card2 card border-0 px-4 py-5 mt-3 ">
-              <div className="row mb-4 px-3">
-                <h6 className="mb-0 mr-4 mt-2">Sign in with</h6>
-                <div className="facebook text-center mr-3">
-                  <i class="fab fa-facebook-f"></i>
-                </div>
-                <div className="twitter text-center mr-3">
-                  <i class="fab fa-twitter"></i>
-                </div>
-                <div className="linkedin text-center mr-3">
-                  <i class="fab fa-linkedin"></i>
-                </div>
-              </div>
-              <div className="row px-3 mb-4">
-                <div className="line" />{" "}
-                <small className="or text-center">Or</small>
-                <div className="line" />
-              </div>
-
               <div className="row px-3">
                 {" "}
                 <label className="mb-1">
