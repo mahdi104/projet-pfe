@@ -38,7 +38,10 @@ function App() {
         <PrivateRoute path="/profile" component={Profile} />
         <Route path="/signinadmin" component={SignInAdmin} />
         <PrivateRouteadmin path="/interfaceadmin" component={InterfaceAdmin} />
-        <Route path="/AddProduct" component={AddProduct} />
+        <PrivateRouteadmin
+          path={["/AddProduct", "/Update/:id"]}
+          component={AddProduct}
+        />
       </Switch>
       <Footer />
     </div>

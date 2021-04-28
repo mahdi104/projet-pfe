@@ -1,13 +1,13 @@
 .sideBar {
   height: 100%;
-  width: 160px;
+  width: 15%;
   position: fixed;
   z-index: 1;
   top: 0;
   left: 0;
   background-color: #111;
   overflow-x: hidden;
-  margin-top: 6.5%;
+  margin-top: 5.75%;
   padding-top: 50px;
 }
 

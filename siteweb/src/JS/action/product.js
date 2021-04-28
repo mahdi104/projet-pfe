@@ -51,7 +51,7 @@ export const addProduct = (newProduct) => async (dispatch) => {
 
 //edit Product
 
-export const editProduct = (productId, newProduct) => async (dispatch) => {
+export const editProduct = (id, newProduct) => async (dispatch) => {
   try {
     await axios.put(`/api/product/${id}`, newProduct);
     dispatch(getProduct());

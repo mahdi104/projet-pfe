@@ -1,107 +1,70 @@
-import React from "react";
-import { Form } from "react-bootstrap";
-import addBtn from "../../Assets/image/add.png";
-import editBtn from "../../Assets/image/edit.png";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addProduct, editProduct } from "../../JS/action/product";
+import { Button, Form } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 
 const AddProduct = () => {
-  const isEdit = useSelector((state) => state.productReducer.isEdit);
-  const product = useSelector((state) => state.productReducer.product);
-
-  // State
   const [product, setProduct] = useState({
     title: "",
     description: "",
     details: "",
     categories: "",
   });
-
+  const productReducer = useSelector((state) => state.productReducer.products);
+  const edit = useSelector((state) => state.productReducer.isEdit);
   const dispatch = useDispatch();
-
   useEffect(() => {
-    isEdit
-      ? productReducer(productReducer)
+    edit
+      ? setProduct(productReducer)
       : setProduct({ title: "", description: "", details: "", categories: "" });
-  }, [isEdit, productReducer]);
-
-  // handleEdit function
-  const handleEdit = () => {
-    dispatch(esitProduct(product._id, product));
+  }, [productReducer, edit]);
+  const handleProduct = () => {
+    if (!edit) {
+      dispatch(addProduct(product));
+    } else {
+      dispatch(editProduct(product._id, product));
+    }
   };
-
-  // handleAdd function
-  const handleAdd = () => {
-    dispatch(addContact(product));
-  };
-
-  // handlechange
   const handleChange = (e) => {
+    e.preventDefault();
     setProduct({ ...product, [e.target.name]: e.target.value });
   };
   return (
-    <div>
-      <Form className="my-form">
-        {/* input Title */}
-        <Form.Group className="my-little-form">
-          <Form.Control
-            type="text"
-            placeholder="Enter Product Title ..."
-            name="title"
-            value={product.title}
-            onChange={handleChange}
-          />
-          <Form.Text className="text-muted">Title is required !!</Form.Text>
-        </Form.Group>
-
-        {/* input Description */}
-        <Form.Group>
-          <Form.Control
-            type="text"
-            placeholder="Enter Description ..."
-            name="Description"
-            value={product.description}
-            onChange={handleChange}
-          />
-          <Form.Text className="text-muted">
-            Description is required !!
-          </Form.Text>
-        </Form.Group>
-
-        {/* input Details */}
-        <Form.Group>
-          <Form.Control
-            type="text"
-            placeholder="Enter contact phone ..."
-            name="Details"
-            value={product.details}
-            onChange={handleChange}
-          />
-        </Form.Group>
-
-        {/* add or edit button*/}
-        {isEdit ? (
-          <img
-            src={editBtn}
-            alt="edit"
-            className="edit-btn"
-            onClick={() => {
-              handleEdit();
-              history.push("/");
-            }}
-          />
-        ) : (
-          <img
-            src={addBtn}
-            alt="add"
-            className="add-btn"
-            onClick={() => {
-              handleAdd();
-              history.push("/");
-            }}
-          />
-        )}
-      </Form>
-      )
-    </div>
+    <Form>
+      <Form.Field>
+        <label> Title</label>
+        <input
+          value={product.title}
+          placeholder=" Title"
+          name="title"
+          onChange={handleChange}
+        />
+      </Form.Field>
+      <Form.Field>
+        <label>Description</label>
+        <input
+          value={product.description}
+          placeholder="description"
+          name="description"
+          onChange={handleChange}
+        />
+      </Form.Field>
+      <Form.Field>
+        <label>Details</label>
+        <input
+          value={product.details}
+          placeholder="details"
+          name="details"
+          onChange={handleChange}
+        />
+      </Form.Field>
+      <Link to="/interfaceadmin">
+        <Button type="submit" onClick={handleProduct}>
+          {edit ? "Edit" : "Save"}
+        </Button>
+      </Link>
+    </Form>
   );
 };
 

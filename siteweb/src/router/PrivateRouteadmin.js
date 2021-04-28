@@ -6,6 +6,6 @@ const PrivateRouteadmin = ({ component: Component, ...rest }) => {
   if (isAdmin) {
     return <Route component={Component} {...rest} />;
   }
-  return <Redirect to="/" />;
+  return <Redirect to="/interfaceadmin" />;
 };
 export default PrivateRouteadmin;
