@@ -41,8 +41,9 @@ export const deleteProduct = (id) => async (dispatch) => {
 
 //Add Product
 export const addProduct = (newProduct) => async (dispatch) => {
+  console.log(newProduct);
   try {
-    await axios.post("/api/product/", newProduct);
+    await axios.post("/api/product", newProduct);
     dispatch(getProduct());
   } catch (error) {
     console.log(error);

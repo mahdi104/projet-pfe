@@ -20,6 +20,8 @@ import Profile from "./Pages/profil/Profil";
 import InterfaceAdmin from "./Pages/InterfaceAdmin/InterfaceAdmin";
 import SignInAdmin from "./Pages/SignInAdmin/SignInAdmin";
 import AddProduct from "./Component/AddProduct/AddProduct";
+import Product from "./Component/Product/Product";
+import ProductList from "./Component/ProductList/ProductList";
 
 function App() {
   return (
@@ -42,6 +44,8 @@ function App() {
           path={["/AddProduct", "/Update/:id"]}
           component={AddProduct}
         />
+
+        <PrivateRouteadmin path="/Get" component={ProductList} />
       </Switch>
       <Footer />
     </div>

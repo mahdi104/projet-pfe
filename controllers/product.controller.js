@@ -8,6 +8,7 @@ const Product = require("../models/Product");
    @access : public/private
   */
 const create = async (req, res) => {
+  console.log(req.body)
   try {
     const { title, description, details, categories } = req.body;
     if (!title || !description) {

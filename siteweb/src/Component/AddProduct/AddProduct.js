@@ -17,7 +17,7 @@ const AddProduct = () => {
   useEffect(() => {
     edit
       ? setProduct(productReducer)
-      : setProduct({ title: "", description: "", details: "", categories: "" });
+      : setProduct({ description: "", details: "", categories: "" });
   }, [productReducer, edit]);
   const handleProduct = () => {
     if (!edit) {
@@ -56,6 +56,15 @@ const AddProduct = () => {
           value={product.details}
           placeholder="details"
           name="details"
+          onChange={handleChange}
+        />
+      </Form.Field>
+      <Form.Field>
+        <label>Catégories</label>
+        <input
+          value={product.categories}
+          placeholder="Catégories"
+          name="categories"
           onChange={handleChange}
         />
       </Form.Field>

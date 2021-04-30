@@ -1,38 +1,37 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import "./ContactCard.css";
-import editBtn from "../../Assets/edit.png";
-import avatar from "../../Assets/avatar.png";
-import deleteBtn from "../../Assets/delete.png";
-import { getProduct, deleteProduct, toggleTrue } from "../../JS/action/product";
+import "./productList.css";
 
-const ProductList = ({ product }) => {
+import { getProduct } from "../../JS/action/product";
+import Product from "../Product/Product";
+
+const ProductList = () => {
+  const products = useSelector((state) => state.productReducer.products);
+  console.log(products);
+  const loadProducts = useSelector(
+    (state) => state.productReducer.loadProducts
+  );
   const dispatch = useDispatch();
-
+  useEffect(() => {
+    dispatch(getProduct());
+  }, []);
   return (
-    <div className="contact-card">
-      <img src={avatar} alt="avatar" className="avatar" />
-      <h3>{product.title}</h3>
-      <span>{product.description}</span>
-      <span>{product.details}</span>
-      <div className="delete-edit-btns">
-        <img
-          src={deleteBtn}
-          alt="delete-icon"
-          onClick={() => dispatch(deleteProduct(product._id))}
-        />
-        <Link to="/editProduct">
-          <img
-            src={editBtn}
-            alt="edit-icon"
-            onClick={() => {
-              dispatch(toggleTrue());
-              dispatch(getProduct(product._id));
-            }}
-          />
-        </Link>
+    <div>
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "space-around",
+        }}
+      >
+        {loadProducts ? (
+          <h2>loading</h2>
+        ) : products.length == 0 ? (
+          <h2>there is no data show</h2>
+        ) : (
+          products.map((el) => <Product key={el._id} products={el} />)
+        )}
       </div>
     </div>
   );

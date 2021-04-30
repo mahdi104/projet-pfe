@@ -1,13 +1,17 @@
-.par-design {
-  padding: 15%;
-  font-weight: bold;
-  font-size: 20px;
-  color: #102181;
-  text-align: center;
-}
 .position {
-  padding: 15%;
+  display: flex;
+  align-items: center;
+  margin: 10% 15% 15% 25%;
+  /* margin-left: 25%;
+  margin-right: 25%;
+  margin-top: 10%; */
 }
-/* .couleurbg {
-  background-color: #b0e0e6;
-} */
+.stylepar {
+  font-size: 20px;
+  color: #18207d !important;
+}
+span {
+  font-size: 22px;
+  font-weight: bold;
+  color: #f60f2b;
+}
