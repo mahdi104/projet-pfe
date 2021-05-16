@@ -5,6 +5,7 @@ import {
   LOGIN_USER,
   REGISTER_USER,
   LOGOUT_USER,
+  GET_ALL_USERS,
 } from "../actionTypes/user";
 
 import axios from "axios";
@@ -13,7 +14,7 @@ export const register = (newUser, history) => async (dispatch) => {
   dispatch({ type: LOAD_USER });
   try {
     const result = await axios.post("/api/user/signup", newUser);
-    console.log("yesssssss" , result);
+    console.log("yesssssss", result);
     dispatch({ type: REGISTER_USER, payload: result.data }); //msg , token , user
 
     history.push("/profile");
@@ -30,14 +31,18 @@ export const login = (user, history) => async (dispatch) => {
   try {
     const result = await axios.post("/api/user/signin", user);
     dispatch({ type: LOGIN_USER, payload: result.data }); //msg /token , user
-    history.push("/Profile");
+    if (result.data.User.status === "active") {
+      history.push("/Profile");
+    } else {
+      history.push("/errors");
+    }
   } catch (error) {
     // error.response.data.errors.map((el) =>
     //   setTimeout(function () {
     //     alert(el.msg);
     //   }, 3000)
     // );
-    dispatch({ type: FAIL_USER, payload: error.response.data.errors });
+    dispatch({ type: FAIL_USER, payload: error });
   }
 };
 
@@ -63,4 +68,31 @@ export const videErrors = () => {
   return {
     type: "VIDE_ERRORS",
   };
+};
+
+export const getUsers = () => async (dispatch) => {
+  try {
+    //ZID ZOK OM EL AUTH ADMIN LENNA W FL BACK
+    // const options = {
+    //   headers: { Authorization: localStorage.getItem("token") },
+    // };.
+    //ma tensech el options
+    const result = await axios.get("api/admin/all");
+    dispatch({ type: GET_ALL_USERS, payload: result.data.Users });
+  } catch (error) {
+    dispatch({ type: FAIL_USER, payload: error.response.data });
+  }
+};
+export const update = (id, info) => async (dispatch) => {
+  try {
+    //ZID ZOK OM EL AUTH ADMIN LENNA W FL BACK
+    // const options = {
+    //   headers: { Authorization: localStorage.getItem("token") },
+    // };.
+    //ma tensech el options
+    const result = await axios.put(`api/admin/update${id}`, info);
+    dispatch(getUsers());
+  } catch (error) {
+    dispatch({ type: FAIL_USER, payload: error.response.data });
+  }
 };

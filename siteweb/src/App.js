@@ -20,8 +20,10 @@ import Profile from "./Pages/profil/Profil";
 import InterfaceAdmin from "./Pages/InterfaceAdmin/InterfaceAdmin";
 import SignInAdmin from "./Pages/SignInAdmin/SignInAdmin";
 import AddProduct from "./Component/AddProduct/AddProduct";
-import Product from "./Component/Product/Product";
+
 import ProductList from "./Component/ProductList/ProductList";
+import GetUsers from "./Component/GetUsers/GetUsers";
+import Errors from "./Component/Errors";
 
 function App() {
   return (
@@ -41,13 +43,13 @@ function App() {
         <Route path="/signinadmin" component={SignInAdmin} />
         <PrivateRouteadmin path="/interfaceadmin" component={InterfaceAdmin} />
         <PrivateRouteadmin
-          path={["/AddProduct", "/Update/:id"]}
+          path={["/AddProduct", "/edit/:id"]}
           component={AddProduct}
         />
-
+        <PrivateRouteadmin path="/listeUtilisateurs" component={GetUsers} />
         <PrivateRouteadmin path="/Get" component={ProductList} />
+        <Route path="/*" component={Errors} />
       </Switch>
-      <Footer />
     </div>
   );
 }

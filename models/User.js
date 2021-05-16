@@ -20,6 +20,9 @@ const UserSchema = new Schema({
   etablissement: {
     type: String,
   },
+  status: {
+    type: String,
+  },
 });
 
 module.exports = User = mongoose.model("user", UserSchema);

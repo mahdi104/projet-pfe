@@ -18,12 +18,14 @@ exports.SignUp = async (req, res) => {
       });
       return;
     }
+    const status = "active";
     const newUser = new User({
       firstname,
       lastname,
       email,
       password,
       etablissement,
+      status,
     });
 
     // hash the password
@@ -81,5 +83,47 @@ exports.SignIn = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(400).send({ errors: [{ msg: "can not get the current User" }] });
+  }
+};
+exports.EditUser = async (req, res) => {
+  try {
+    //   req.body
+
+    // check if the email is not found in the database
+    const FoundUser = await User.findOne(req.params);
+
+    if (!FoundUser) {
+      res.status(400).send({
+        errors: [{ msg: "User doesn't exist" }],
+      });
+      return;
+    }
+    const updatedUser = await User.updateOne(req.params, { $set: req.body });
+
+    res.status(200).send({ msg: "User updated succ", User: updatedUser });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({ errors: [{ msg: "can not update the User" }] });
+  }
+};
+
+exports.getAllUsers = async (req, res) => {
+  try {
+    //   req.body
+
+    // check if the email is not found in the database
+    const FoundUser = await User.find({});
+
+    if (!FoundUser) {
+      res.status(400).send({
+        errors: [{ msg: "User doesn't exist" }],
+      });
+      return;
+    }
+
+    res.status(200).send({ msg: "List of users", Users: FoundUser });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({ errors: [{ msg: "can not get the Users" }] });
   }
 };

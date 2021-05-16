@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addProduct, editProduct } from "../../JS/action/product";
+import { addProduct, editProduct, toggleFalse } from "../../JS/action/product";
 import { Button, Form } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-
-const AddProduct = () => {
+import "./AddProduct.css";
+const AddProduct = ({ history, match }) => {
   const [product, setProduct] = useState({
+    img: "",
     title: "",
     description: "",
     details: "",
     categories: "",
   });
+  const id = match.params.id;
   const productReducer = useSelector((state) => state.productReducer.products);
   const edit = useSelector((state) => state.productReducer.isEdit);
   const dispatch = useDispatch();
@@ -30,8 +32,20 @@ const AddProduct = () => {
     e.preventDefault();
     setProduct({ ...product, [e.target.name]: e.target.value });
   };
+  console.log(product.title);
   return (
-    <Form>
+    <Form className="postyle">
+      <Form.Field>
+        <label>Upload Image</label>
+        <input
+          type="file"
+          name="image"
+          id="image"
+          onChange={(e) => {
+            setProduct({ ...product, [e.target.name]: e.target.files[0] });
+          }}
+        />
+      </Form.Field>
       <Form.Field>
         <label> Title</label>
         <input
@@ -68,9 +82,27 @@ const AddProduct = () => {
           onChange={handleChange}
         />
       </Form.Field>
-      <Link to="/interfaceadmin">
-        <Button type="submit" onClick={handleProduct}>
-          {edit ? "Edit" : "Save"}
+      <Link to="/Get">
+        <Button
+          type="submit"
+          onClick={(e) => {
+            const Data = new FormData();
+            Data.append("title", product.title);
+            Data.append("description", product.description);
+            Data.append("details", product.details);
+            Data.append("categories", product.categories);
+            Data.append("file", product.image);
+            if (!edit) {
+              dispatch(addProduct(Data, history));
+            } else {
+              dispatch(editProduct(id, Data, history));
+              dispatch(toggleFalse());
+            }
+
+            e.preventDefault();
+          }}
+        >
+          {!edit ? "Save" : "edit"}
         </Button>
       </Link>
     </Form>

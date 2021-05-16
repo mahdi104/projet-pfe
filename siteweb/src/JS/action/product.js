@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Children } from "react";
 
 import {
   GET_PRODUCT_LOAD,
@@ -14,7 +15,11 @@ import {
 export const getProduct = () => async (dispatch) => {
   dispatch({ type: GET_PRODUCT_LOAD });
   try {
-    const res = await axios.get("/api/product");
+    const options = {
+      headers: { Authorization: localStorage.getItem("token") },
+    };
+    const res = await axios.get("/api/product", options);
+    console.log(res);
     dispatch({
       type: GET_PRODUCT_SUCCESS,
       payload: res.data.listProduct,
@@ -32,7 +37,10 @@ export const getProduct = () => async (dispatch) => {
 
 export const deleteProduct = (id) => async (dispatch) => {
   try {
-    await axios.delete(`/api/product/${id}`);
+    const options = {
+      headers: { Authorization: localStorage.getItem("token") },
+    };
+    await axios.delete(`/api/product/${id}`, options);
     dispatch(getProduct());
   } catch (error) {
     console.log(error);
@@ -40,11 +48,14 @@ export const deleteProduct = (id) => async (dispatch) => {
 };
 
 //Add Product
-export const addProduct = (newProduct) => async (dispatch) => {
-  console.log(newProduct);
+export const addProduct = (newProduct, history) => async (dispatch) => {
   try {
-    await axios.post("/api/product", newProduct);
+    const options = {
+      headers: { Authorization: localStorage.getItem("token") },
+    };
+    await axios.post("/api/product", newProduct, options);
     dispatch(getProduct());
+    history.push("/Get");
   } catch (error) {
     console.log(error);
   }
@@ -52,12 +63,16 @@ export const addProduct = (newProduct) => async (dispatch) => {
 
 //edit Product
 
-export const editProduct = (id, newProduct) => async (dispatch) => {
+export const editProduct = (id, newProduct, history) => async (dispatch) => {
   try {
-    await axios.put(`/api/product/${id}`, newProduct);
-    dispatch(getProduct());
+    const options = {
+      headers: { Authorization: localStorage.getItem("token") },
+    };
+    const res = await axios.put(`/api/product/${id}`, newProduct, options);
+    console.log(res.data);
+    history.push("/Get");
   } catch (error) {
-    console.log(error);
+    console.log("error");
   }
 };
 
@@ -77,7 +92,13 @@ export const toggleFalse = () => {
 // Get Product By Categories
 export const getProductByCategories = (categories) => async (dispatch) => {
   try {
-    const res = await axios.get(`/api/product/categorie/${categories}`);
+    const options = {
+      headers: { Authorization: localStorage.getItem("token") },
+    };
+    const res = await axios.get(
+      `/api/product/categorie/${categories}`,
+      options
+    );
     dispatch({
       type: GET_PRODUCT,
       payload: res.data.productToFind,

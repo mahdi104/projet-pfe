@@ -8,9 +8,9 @@ const Product = require("../models/Product");
    @access : public/private
   */
 const create = async (req, res) => {
-  console.log(req.body)
   try {
     const { title, description, details, categories } = req.body;
+
     if (!title || !description) {
       res.status(400).send({ msg: "title and description are required" });
       return;
@@ -25,6 +25,7 @@ const create = async (req, res) => {
       description,
       details,
       categories,
+      img: req.file.filename,
     });
     await newproduct.save();
     res.status(200).send({ msg: "Product Added Successfully", newproduct });
@@ -42,7 +43,7 @@ const create = async (req, res) => {
  */
 const Retrieve = async (req, res) => {
   try {
-    const listProduct = await Product.find();
+    const listProduct = await Product.find({});
     res.status(200).send({ msg: "List Of Product", listProduct });
   } catch (error) {
     res.status(400).send({ msg: "Cannot Get All Product", error });
@@ -66,10 +67,8 @@ const deleteProduct = async (req, res) => {
 };
 
 const editProduct = async (req, res) => {
-  // console.log(req.body);
-  const { description, details, categories } = req.body;
-
   try {
+    const { description, details, categories } = req.body;
     const productToEdit = await Product.updateOne(
       { _id: req.params._id },
       {
@@ -77,6 +76,7 @@ const editProduct = async (req, res) => {
           description,
           details,
           categories,
+          img: req.file.filename,
         },
       }
     );
@@ -88,6 +88,7 @@ const editProduct = async (req, res) => {
       .send({ msg: "Can not edit Product with this id !!", error });
   }
 };
+
 const getProductByCategories = async (req, res) => {
   try {
     const { cat } = req.params;

@@ -1,25 +1,54 @@
-import React from "react";
-import { Card } from "react-bootstrap";
-import Tel from "../../Assets/image/tel.png";
-import Email from "../../Assets/image/email.png";
+import React, { useState } from "react";
+import { Carousel } from "react-bootstrap";
+import THG from "../../Assets/image/THG.png";
+import Amen from "../../Assets/image/Footer Amen.png";
+import Clinique from "../../Assets/image/clinique.png";
 import "./Footer.css";
 
 const Footer = () => {
+  const [index, setIndex] = useState(0);
+
+  const handleSelect = (selectedIndex, e) => {
+    setIndex(selectedIndex);
+  };
   return (
     <div>
-      <Card className="text-center">
-        <Card.Header></Card.Header>
-        <Card.Body>
-          <Card.Title className="typestyle ">Contactez-Nous</Card.Title>
-          <Card.Text>
-            <img src={Tel} alt="telicon" className="sizeicone" />
-            55 457 371
-            <br />
-            <img src={Email} alt="emailicon" className="sizeicone" />
-            mohamedamine.dimassi@planet.tn
-          </Card.Text>
-        </Card.Body>
-      </Card>
+      <div className="background">
+        <h2 className="styletype">Nos Clients</h2>
+      </div>
+      <Carousel
+        activeIndex={index}
+        onSelect={handleSelect}
+        className="sizestyle"
+      >
+        <Carousel.Item>
+          <img
+            className="d-block w-100"
+            src={THG}
+            alt="First slide"
+            width="640px"
+            height="360px"
+          />
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="d-block w-100"
+            src={Amen}
+            alt="Second slide"
+            width="640px"
+            height="360px"
+          />
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="d-block w-100"
+            src={Clinique}
+            alt="Third slide"
+            width="640px"
+            height="360px"
+          />
+        </Carousel.Item>
+      </Carousel>
     </div>
   );
 };

@@ -8,7 +8,7 @@ import Product from "../Product/Product";
 
 const ProductList = () => {
   const products = useSelector((state) => state.productReducer.products);
-  console.log(products);
+
   const loadProducts = useSelector(
     (state) => state.productReducer.loadProducts
   );
@@ -23,6 +23,9 @@ const ProductList = () => {
           display: "flex",
           flexWrap: "wrap",
           justifyContent: "space-around",
+          alignItems: "stretch",
+          margin: "5%",
+          padding: "5%",
         }}
       >
         {loadProducts ? (
@@ -30,7 +33,7 @@ const ProductList = () => {
         ) : products.length == 0 ? (
           <h2>there is no data show</h2>
         ) : (
-          products.map((el) => <Product key={el._id} products={el} />)
+          products.map((el) => <Product key={el._id} product={el} user={{}} />)
         )}
       </div>
     </div>

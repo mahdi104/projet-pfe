@@ -5,6 +5,10 @@ const mongoose = require("mongoose");
 
 const schema = mongoose.Schema;
 const ProductSchema = new schema({
+  img: {
+    type: String,
+    // default: "placeholder.jpg",
+  },
   title: {
     type: String,
     required: true,

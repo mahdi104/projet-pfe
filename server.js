@@ -17,6 +17,8 @@ app.use(express.json());
 app.use("/api/admin", require("./router/admin"));
 app.use("/api/product", require("./router/Product"));
 app.use("/api/user", require("./router/user"));
+// app.use(express.static("public"));
+app.use("/static", express.static(__dirname + "/public"));
 
 // 3 PORT
 const PORT = process.env.PORT;

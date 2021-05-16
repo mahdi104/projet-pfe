@@ -2,6 +2,7 @@
   background-color: #102181 !important;
   display: flex !important;
   justify-content: space-between !important;
+  padding: 1% 3% !important;
 }
 
 .my-nav {
@@ -16,7 +17,7 @@
   color: white;
 }
 .logo {
-  width: 30%;
+  width: 17%;
 }
 
 .dropdown-menu a {
